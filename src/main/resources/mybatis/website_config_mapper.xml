@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.mapper.WebsiteConfigMapper">
+
+    <resultMap type="com.hx.domain.WebsiteConfig" id="HxWebsiteConfigMap">
+        <result property="id" column="id"/>
+        <result property="siteName" column="site_name"/>
+        <result property="siteDomain" column="site_domain"/>
+        <result property="email" column="email"/>
+        <result property="cookieStatus" column="cookie_status"/>
+        <result property="staticIndexStatus" column="static_index_status"/>
+        <result property="beianInfo" column="beian_info"/>
+        <result property="versionInfo" column="version_info"/>
+        <result property="staticCode" column="static_code"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <insert id="insertHxWebsiteConfig" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `hx_website_config`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="siteName!=null">
+                `site_name`,
+            </if>
+            <if test="siteDomain!=null">
+                `site_domain`,
+            </if>
+            <if test="email!=null">
+                `email`,
+            </if>
+            <if test="cookieStatus!=null">
+                `cookie_status`,
+            </if>
+            <if test="staticIndexStatus!=null">
+                `static_index_status`,
+            </if>
+            <if test="beianInfo!=null">
+                `beian_info`,
+            </if>
+            <if test="versionInfo!=null">
+                `version_info`,
+            </if>
+            <if test="staticCode!=null">
+                `static_code`,
+            </if>
+            <if test="isDeleted!=null">
+                `is_deleted`,
+            </if>
+                `gmt_create`,
+                `gmt_modified`,
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="siteName!=null">
+                #{siteName},
+            </if>
+            <if test="siteDomain!=null">
+                #{siteDomain},
+            </if>
+            <if test="email!=null">
+                #{email},
+            </if>
+            <if test="cookieStatus!=null">
+                #{cookieStatus},
+            </if>
+            <if test="staticIndexStatus!=null">
+                #{staticIndexStatus},
+            </if>
+            <if test="beianInfo!=null">
+                #{beianInfo},
+            </if>
+            <if test="versionInfo!=null">
+                #{versionInfo},
+            </if>
+            <if test="staticCode!=null">
+                #{staticCode},
+            </if>
+            <if test="isDeleted!=null">
+                #{isDeleted},
+            </if>
+                now(),
+                now(),
+        </trim>
+        )
+    </insert>
+
+
+    <update id="updateHxWebsiteConfig">
+        UPDATE `hx_website_config`
+        SET
+        <trim suffixOverrides=",">
+            <if test="siteName != null and siteName!=''">
+                `site_name` = #{siteName},
+            </if>
+            <if test="siteDomain != null and siteDomain!=''">
+                `site_domain` = #{siteDomain},
+            </if>
+            <if test="email != null and email!=''">
+                `email` = #{email},
+            </if>
+            <if test="cookieStatus != null">
+                `cookie_status` = #{cookieStatus},
+            </if>
+            <if test="staticIndexStatus != null">
+                `static_index_status` = #{staticIndexStatus},
+            </if>
+            <if test="beianInfo != null and beianInfo!=''">
+                `beian_info` = #{beianInfo},
+            </if>
+            <if test="versionInfo != null and versionInfo!=''">
+                `version_info` = #{versionInfo},
+            </if>
+            <if test="staticCode != null and staticCode!=''">
+                `static_code` = #{staticCode},
+            </if>
+            <if test="isDeleted != null">
+                `is_deleted` = #{isDeleted},
+            </if>
+            <if test="gmtCreate != null">
+                `gmt_create` = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                `gmt_modified` = #{gmtModified},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <select id="selectWebSiteConfig" resultType="com.hx.domain.WebsiteConfig">
+        SELECT * from hx_website_config limit 1
+    </select>
+
+</mapper>

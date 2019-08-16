@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.mapper.OperateRecordMapper">
+
+    <resultMap type="com.hx.domain.OperateRecord" id="HxOperateRecordMap">
+        <result property="id" column="id"/>
+        <result property="curDate" column="cur_date"/>
+        <result property="interfaceUrl" column="interface_url"/>
+        <result property="operateAccount" column="operate_account"/>
+        <result property="operateIp" column="operate_ip"/>
+        <result property="params" column="params"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <insert id="insertHxOperateRecord" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `hx_operate_record`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="curDate!=null">
+                `cur_date`,
+            </if>
+            <if test="interfaceUrl!=null">
+                `interface_url`,
+            </if>
+            <if test="operateAccount!=null">
+                `operate_account`,
+            </if>
+            <if test="operateIp!=null">
+                `operate_ip`,
+            </if>
+            <if test="params!=null">
+                `params`,
+            </if>
+            <if test="gmtCreate!=null">
+                `gmt_create`,
+            </if>
+            <if test="gmtModified!=null">
+                `gmt_modified`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="curDate!=null">
+                #{curDate},
+            </if>
+            <if test="interfaceUrl!=null">
+                #{interfaceUrl},
+            </if>
+            <if test="operateAccount!=null">
+                #{operateAccount},
+            </if>
+            <if test="operateIp!=null">
+                #{operateIp},
+            </if>
+            <if test="params!=null">
+                #{params},
+            </if>
+            <if test="gmtCreate!=null">
+                #{gmtCreate},
+            </if>
+            <if test="gmtModified!=null">
+                #{gmtModified},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+    <update id="updateHxOperateRecord">
+        UPDATE `hx_operate_record`
+        SET
+        <trim suffixOverrides=",">
+            <if test="curDate != null">
+                `cur_date` = #{curDate},
+            </if>
+            <if test="interfaceUrl != null and interfaceUrl!=''">
+                `interface_url` = #{interfaceUrl},
+            </if>
+            <if test="operateAccount != null">
+                `operate_account` = #{operateAccount},
+            </if>
+            <if test="operateIp != null and operateIp!=''">
+                `operate_ip` = #{operateIp},
+            </if>
+            <if test="params != null and params!=''">
+                `params` = #{params},
+            </if>
+            <if test="gmtCreate != null">
+                `gmt_create` = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                `gmt_modified` = #{gmtModified},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+</mapper>

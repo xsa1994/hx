@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.mapper.PageVisitRecordMapper">
+
+    <resultMap type="com.hx.domain.PageVisitRecord" id="HxPageVisitRecordMap">
+        <result property="id" column="id"/>
+        <result property="curDate" column="cur_date"/>
+        <result property="userId" column="user_id"/>
+        <result property="visitIp" column="visit_ip"/>
+        <result property="userAgent" column="user_agent"/>
+        <result property="pageId" column="page_id"/>
+        <result property="articleId" column="article_id"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <insert id="insertHxPageVisitRecord" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `hx_page_visit_record`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="curDate!=null">
+                `cur_date`,
+            </if>
+            <if test="userId!=null">
+                `user_id`,
+            </if>
+            <if test="visitIp!=null">
+                `visit_ip`,
+            </if>
+            <if test="userAgent!=null">
+                `user_agent`,
+            </if>
+            <if test="pageId!=null">
+                `page_id`,
+            </if>
+            <if test="articleId!=null">
+                `article_id`,
+            </if>
+                `gmt_create`,
+                `gmt_modified`,
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="curDate!=null">
+                #{curDate},
+            </if>
+            <if test="userId!=null">
+                #{userId},
+            </if>
+            <if test="visitIp!=null">
+                #{visitIp},
+            </if>
+            <if test="userAgent!=null">
+                #{userAgent},
+            </if>
+            <if test="pageId!=null">
+                #{pageId},
+            </if>
+            <if test="articleId!=null">
+                #{articleId},
+            </if>
+                now(),
+                now(),
+        </trim>
+        )
+    </insert>
+
+
+    <update id="updateHxPageVisitRecord">
+        UPDATE `hx_page_visit_record`
+        SET
+        <trim suffixOverrides=",">
+            <if test="curDate != null">
+                `cur_date` = #{curDate},
+            </if>
+            <if test="userId != null and userId!=''">
+                `user_id` = #{userId},
+            </if>
+            <if test="visitIp != null and visitIp!=''">
+                `visit_ip` = #{visitIp},
+            </if>
+            <if test="userAgent != null and userAgent!=''">
+                `user_agent` = #{userAgent},
+            </if>
+            <if test="pageId != null">
+                `page_id` = #{pageId},
+            </if>
+            <if test="articleId != null">
+                `article_id` = #{articleId},
+            </if>
+            <if test="gmtCreate != null">
+                `gmt_create` = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                `gmt_modified` = #{gmtModified},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <select id="sumLatestWeekData" resultType="com.hx.domain.PageVisitStatistics">
+        select
+        cur_date,
+        count(id) as visitPv,
+        count(DISTINCT(user_id)) as visitUv
+        from hx_page_visit_record
+        where cur_date BETWEEN #{startDate} and #{endDate}
+        group by cur_date
+    </select>
+
+</mapper>

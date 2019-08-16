@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.mapper.SeoConfigMapper">
+
+    <resultMap type="com.hx.domain.SeoConfig" id="HxSeoConfigMap">
+        <result property="id" column="id"/>
+        <result property="seoTitle" column="seo_title"/>
+        <result property="seoKeyWord" column="seo_key_word"/>
+        <result property="seoDesc" column="seo_desc"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+
+    <insert id="insertHxSeoConfig" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `hx_seo_config`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="seoTitle!=null">
+                `seo_title`,
+            </if>
+            <if test="seoKeyWord!=null">
+                `seo_key_word`,
+            </if>
+            <if test="seoDesc!=null">
+                `seo_desc`,
+            </if>
+            <if test="isDeleted!=null">
+                `is_deleted`,
+            </if>
+                `gmt_create`,
+                `gmt_modified`,
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="seoTitle!=null">
+                #{seoTitle},
+            </if>
+            <if test="seoKeyWord!=null">
+                #{seoKeyWord},
+            </if>
+            <if test="seoDesc!=null">
+                #{seoDesc},
+            </if>
+            <if test="isDeleted!=null">
+                #{isDeleted},
+            </if>
+                #{gmtCreate},
+                #{gmtModified},
+        </trim>
+        )
+    </insert>
+
+
+    <update id="updateHxSeoConfig">
+        UPDATE `hx_seo_config`
+        SET
+        <trim suffixOverrides=",">
+            <if test="seoTitle != null and seoTitle!=''">
+                `seo_title` = #{seoTitle},
+            </if>
+            <if test="seoKeyWord != null and seoKeyWord!=''">
+                `seo_key_word` = #{seoKeyWord},
+            </if>
+            <if test="seoDesc != null and seoDesc!=''">
+                `seo_desc` = #{seoDesc},
+            </if>
+            <if test="isDeleted != null">
+                `is_deleted` = #{isDeleted},
+            </if>
+            <if test="gmtCreate != null">
+                `gmt_create` = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                `gmt_modified` = #{gmtModified},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <select id="selectSeoConfig" resultType="com.hx.domain.SeoConfig">
+        SELECT * from hx_seo_config limit 1
+    </select>
+
+</mapper>

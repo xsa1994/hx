@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.mapper.MenuPageMapper">
+
+    <resultMap type="com.hx.domain.MenuPage" id="HxMenuPageMap">
+        <result property="id" column="id"/>
+        <result property="kindId" column="kind_id"/>
+        <result property="pageName" column="page_name"/>
+        <result property="pageKeyWord" column="page_key_word"/>
+        <result property="pageDesc" column="page_desc"/>
+        <result property="pageImg" column="page_img"/>
+        <result property="pageContent" column="page_content"/>
+        <result property="pageTemplate" column="page_template"/>
+        <result property="pageSort" column="page_sort"/>
+        <result property="displayStatus" column="display_status"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <insert id="insertHxMenuPage" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `hx_menu_page`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="kindId!=null">
+                `kind_id`,
+            </if>
+            <if test="pageName!=null">
+                `page_name`,
+            </if>
+            <if test="pageKeyWord!=null">
+                `page_key_word`,
+            </if>
+            <if test="pageDesc!=null">
+                `page_desc`,
+            </if>
+            <if test="pageImg!=null">
+                `page_img`,
+            </if>
+            <if test="pageContent!=null">
+                `page_content`,
+            </if>
+            <if test="pageTemplate!=null">
+                `page_template`,
+            </if>
+            <if test="pageSort!=null">
+                `page_sort`,
+            </if>
+            <if test="displayStatus!=null">
+                `display_status`,
+            </if>
+            <if test="isDeleted!=null">
+                `is_deleted`,
+            </if>
+            `gmt_create`,
+            `gmt_modified`,
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="kindId!=null">
+                #{kindId},
+            </if>
+            <if test="pageName!=null">
+                #{pageName},
+            </if>
+            <if test="pageKeyWord!=null">
+                #{pageKeyWord},
+            </if>
+            <if test="pageDesc!=null">
+                #{pageDesc},
+            </if>
+            <if test="pageImg!=null">
+                #{pageImg},
+            </if>
+            <if test="pageContent!=null">
+                #{pageContent},
+            </if>
+            <if test="pageTemplate!=null">
+                #{pageTemplate},
+            </if>
+            <if test="pageSort!=null">
+                #{pageSort},
+            </if>
+            <if test="displayStatus!=null">
+                #{displayStatus},
+            </if>
+            <if test="isDeleted!=null">
+                #{isDeleted},
+            </if>
+            now(),
+            now(),
+        </trim>
+        )
+    </insert>
+
+
+    <update id="updateHxMenuPage">
+        UPDATE `hx_menu_page`
+        SET
+        <trim suffixOverrides=",">
+            <if test="kindId != null">
+                `kind_id` = #{kindId},
+            </if>
+            <if test="pageName != null and pageName!=''">
+                `page_name` = #{pageName},
+            </if>
+            <if test="pageKeyWord != null and pageKeyWord!=''">
+                `page_key_word` = #{pageKeyWord},
+            </if>
+            <if test="pageDesc != null and pageDesc!=''">
+                `page_desc` = #{pageDesc},
+            </if>
+            <if test="pageImg != null and pageImg!=''">
+                `page_img` = #{pageImg},
+            </if>
+            <if test="pageContent != null and pageContent!=''">
+                `page_content` = #{pageContent},
+            </if>
+            <if test="pageTemplate != null and pageTemplate!=''">
+                `page_template` = #{pageTemplate},
+            </if>
+            <if test="pageSort != null">
+                `page_sort` = #{pageSort},
+            </if>
+            <if test="displayStatus != null">
+                `display_status` = #{displayStatus},
+            </if>
+            <if test="isDeleted != null">
+                `is_deleted` = #{isDeleted},
+            </if>
+            <if test="gmtCreate != null">
+                `gmt_create` = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                `gmt_modified` = #{gmtModified},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <delete id="deleteByIds">
+        delete from hx_menu_page
+        where id in
+        <foreach collection="ids" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from hx_menu_page
+    </select>
+
+    <select id="pageQueryAll" resultType="com.hx.domain.MenuPage">
+        select * from hx_menu_page limit #{start},#{limit}
+    </select>
+
+    <select id="selectById" resultType="com.hx.domain.MenuPage">
+        SELECT * from hx_menu_page where id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.mapper.AccountMapper">
+
+    <resultMap type="com.hx.domain.Account" id="HxAccountMap">
+        <result property="id" column="id"/>
+        <result property="password" column="password"/>
+        <result property="accountName" column="account_name"/>
+        <result property="mobilePhone" column="mobile_phone"/>
+        <result property="email" column="email"/>
+        <result property="linkName" column="link_name"/>
+        <result property="idNum" column="id_num"/>
+        <result property="linkQq" column="link_qq"/>
+        <result property="accountStatus" column="account_status"/>
+        <result property="roleType" column="role_type"/>
+        <result property="belongSystem" column="belong_system"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <insert id="insertHxAccount" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `hx_account`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="password!=null">
+                `password`,
+            </if>
+            <if test="accountName!=null">
+                `account_name`,
+            </if>
+            <if test="mobilePhone!=null">
+                `mobile_phone`,
+            </if>
+            <if test="email!=null">
+                `email`,
+            </if>
+            <if test="linkName!=null">
+                `link_name`,
+            </if>
+            <if test="idNum!=null">
+                `id_num`,
+            </if>
+            <if test="linkQq!=null">
+                `link_qq`,
+            </if>
+            <if test="accountStatus!=null">
+                `account_status`,
+            </if>
+            <if test="roleType!=null">
+                `role_type`,
+            </if>
+            <if test="belongSystem!=null">
+                `belong_system`,
+            </if>
+            `gmt_create`,
+            `gmt_modified`,
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="accountName!=null">
+                #{accountName},
+            </if>
+            <if test="mobilePhone!=null">
+                #{mobilePhone},
+            </if>
+            <if test="email!=null">
+                #{email},
+            </if>
+            <if test="linkName!=null">
+                #{linkName},
+            </if>
+            <if test="idNum!=null">
+                #{idNum},
+            </if>
+            <if test="linkQq!=null">
+                #{linkQq},
+            </if>
+            <if test="accountStatus!=null">
+                #{accountStatus},
+            </if>
+            <if test="roleType!=null">
+                #{roleType},
+            </if>
+            <if test="belongSystem!=null">
+                #{belongSystem},
+            </if>
+            now(),
+            now(),
+        </trim>
+        )
+    </insert>
+
+
+    <update id="updateHxAccount">
+        UPDATE `hx_account`
+        SET
+        <trim suffixOverrides=",">
+            <if test="password != null and password!=''">
+                `password` = #{password},
+            </if>
+            <if test="accountName != null and accountName!=''">
+                `account_name` = #{accountName},
+            </if>
+            <if test="mobilePhone != null">
+                `mobile_phone` = #{mobilePhone},
+            </if>
+            <if test="email != null and email!=''">
+                `email` = #{email},
+            </if>
+            <if test="linkName != null and linkName!=''">
+                `link_name` = #{linkName},
+            </if>
+            <if test="idNum != null and idNum!=''">
+                `id_num` = #{idNum},
+            </if>
+            <if test="linkQq != null and linkQq!=''">
+                `link_qq` = #{linkQq},
+            </if>
+            <if test="accountStatus != null">
+                `account_status` = #{accountStatus},
+            </if>
+            <if test="roleType != null">
+                `role_type` = #{roleType},
+            </if>
+            <if test="belongSystem != null">
+                `belong_system` = #{belongSystem},
+            </if>
+            <if test="gmtCreate != null">
+                `gmt_create` = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                `gmt_modified` = #{gmtModified},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <delete id="deleteByIds">
+        delete from hx_account
+        where id in
+        <foreach collection="ids" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="selectByName" resultType="com.hx.domain.Account">
+        select * from hx_account where `account_name` = #{accountName}
+    </select>
+
+    <select id="pageQueryAll" resultType="com.hx.domain.Account">
+        select * from hx_account limit #{start},#{limit}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from hx_account
+    </select>
+
+    <select id="selectById" resultType="com.hx.domain.Account">
+        select * from hx_account where id = #{id}
+    </select>
+
+</mapper>

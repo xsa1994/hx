@@ -1,0 +1,37 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.10.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.hx'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web-services'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.0.1'
+    compile group: 'com.google.guava', name: 'guava', version: '28.0-jre'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.58'
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.6.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'com.github.xiaoymin', name: 'swagger-bootstrap-ui', version: '1.9.0'
+    compile group: 'joda-time', name: 'joda-time', version: '2.10.2'
+    compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.22'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.1.5.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
+    compile group: 'org.aspectj', name: 'aspectjrt', version: '1.9.4'
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.4'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+
+}

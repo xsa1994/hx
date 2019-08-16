@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.mapper.ArticleKindMapper">
+
+    <resultMap type="com.hx.domain.ArticleKind" id="HxArticleKindMap">
+        <result property="id" column="id"/>
+        <result property="kindName" column="kind_name"/>
+        <result property="kindDesc" column="kind_desc"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <insert id="insertHxArticleKind" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `hx_article_kind`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="kindName!=null">
+                `kind_name`,
+            </if>
+            <if test="kindDesc!=null">
+                `kind_desc`,
+            </if>
+            <if test="isDeleted!=null">
+                `is_deleted`,
+            </if>
+            <if test="gmtCreate!=null">
+                `gmt_create`,
+            </if>
+            <if test="gmtModified!=null">
+                `gmt_modified`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="kindName!=null">
+                #{kindName},
+            </if>
+            <if test="kindDesc!=null">
+                #{kindDesc},
+            </if>
+            <if test="isDeleted!=null">
+                #{isDeleted},
+            </if>
+            <if test="gmtCreate!=null">
+                #{gmtCreate},
+            </if>
+            <if test="gmtModified!=null">
+                #{gmtModified},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+    <update id="updateHxArticleKind">
+        UPDATE `hx_article_kind`
+        SET
+        <trim suffixOverrides=",">
+            <if test="kindName != null and kindName!=''">
+                `kind_name` = #{kindName},
+            </if>
+            <if test="kindDesc != null and kindDesc!=''">
+                `kind_desc` = #{kindDesc},
+            </if>
+            <if test="isDeleted != null">
+                `is_deleted` = #{isDeleted},
+            </if>
+            <if test="gmtCreate != null">
+                `gmt_create` = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                `gmt_modified` = #{gmtModified},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+</mapper>
