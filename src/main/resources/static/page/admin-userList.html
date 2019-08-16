@@ -29,46 +29,55 @@
             <th>编辑</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
-            <td>1</td>
-            <td>超级管理员</td>
-            <td>administrator</td>
-            <td>相升澳</td>
-            <td>3207240199407060318</td>
-            <td>15050905240</td>
-            <td>994883700</td>
-            <td>2019-07-15</td>
-            <td>
-                <div class="layui-inline">
-                    <button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="1" data-url="admin-info.html"><i class="layui-icon">&#xe642;</i></button>
-                    <button class="layui-btn layui-btn-small layui-btn-danger delBtn"><i class="layui-icon">&#xe640;</i></button>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
-            <td>1</td>
-            <td>超级管理员</td>
-            <td>administrator</td>
-            <td>相升澳</td>
-            <td>3207240199407060318</td>
-            <td>15050905240</td>
-            <td>994883700</td>
-            <td>2019-07-15</td>
-            <td>
-                <div class="layui-inline">
-                    <button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="1" data-url="admin-info.html"><i class="layui-icon">&#xe642;</i></button>
-                    <button class="layui-btn layui-btn-small layui-btn-danger delBtn"><i class="layui-icon">&#xe640;</i></button>
-                </div>
-            </td>
-        </tr>
-        </tbody>
+        <tbody id="useList"></tbody>
     </table>
+    <div class="page-wrap">
+        <ul class="pagination">
+            <li class="disabled"><span>«</span></li>
+            <li class="active"><span>1</span></li>
+            <li>
+                <a href="#">2</a>
+            </li>
+            <li>
+                <a href="#">»</a>
+            </li>
+        </ul>
+    </div>
 </div>
 <script src="../admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="../admin/js/main.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "http://139.129.6.52:8080/webArticle/create?articleSort=1&clickCount=1&displayStatus=1&id=1&isDeleted=1&kindId=1",
+            dataType: "json",
+            success: function(data){
+                var h="";
+                $.each(data,function(i,n){
+                    h +='<tr>';
+                    h +='<td><input type="checkbox" lay-skin="primary" data-id="1"></td>';
+                    h +='<td>n.id</td>';
+                    h +='<td>n.roleType</td>';
+                    h +='<td>n.accountName</td>';
+                    h +='<td>n.linkName</td>';
+                    h +='<td>n.idNum</td>';
+                    h +='<td>n.mobilePhone</td>';
+                    h +='<td>n.linkQq</td>';
+                    h +='<td>n.gmtModified</td>';
+                    h +='<td>';
+                    h +='<div class="layui-inline">';
+                    h +='<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="1" data-url="admin-info.html"><i class="layui-icon">&#xe642;</i></button>';
+                    h +='<button class="layui-btn layui-btn-small layui-btn-danger delBtn"><i class="layui-icon">&#xe640;</i></button>';
+                    h +='</div>';
+                    h +='</td>';
+                    h +='</tr>';
+                });
+                $('#userList').html(h ? h : '<tr><td colspan="10" align="center">尚未添加任何记录</td></tr>');
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -26,10 +26,10 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">分类栏目：</label>
                     <div class="layui-input-block">
-                        <select name="{kindId}" lay-verify="required">
+                        <select id="kindId" name="kindId" required lay-verify="required">
                             <option value="1">请选择分类栏目</option>
-                            <option value="2">公司新闻</option>
-                            <option value="3">行业新闻</option>
+                            <option value="2">产品中心</option>
+                            <option value="3">解决方案</option>
                         </select>
                     </div>
                 </div>
@@ -37,58 +37,57 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章名称：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="{articleTitle}" required lay-verify="required" placeholder="请输入文章名称" autocomplete="off" class="layui-input">
+                            <input type="text" id="articleTitle" name="articleTitle" class="layui-input" required lay-verify="required" placeholder="请输入文章名称" autocomplete="off" />
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">关键字：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="{articleKeyWord}" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+                                <input type="text" id="articleKeyWord" name="articleKeyWord" class="layui-input" required lay-verify="required" placeholder="请输入关键字" autocomplete="off" />
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">描述：</label>
                         <div class="layui-input-block">
-                            <textarea name="{articleDesc}" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <textarea id="articleDesc" name="articleDesc" class="layui-textarea" required lay-verify="required" placeholder="请输入内容" autocomplete="off"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">图像上传：</label>
                         <div class="layui-input-block">
-                            <input type="file" name="file（可随便定义）" class="layui-upload-file">
+                            <input type="file" name="file（可随便定义）" class="layui-upload-file" required lay-verify="required" placeholder="请上传图片" autocomplete="off" />
                         </div>
                     </div>
-
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">文章内容：</label>
                         <div class="layui-input-block">
-                            <textarea class="layui-textarea layui-hide" name="{articleContent}" lay-verify="content" id="LAY_demo_editor"></textarea>
+                            <textarea id="articleContent" name="articleContent" class="layui-textarea layui-hide" lay-verify="content" autocomplete="off"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">标签：</label>
                         <div class="layui-input-block">
-                            <input type="checkbox" name="{articleTag}" title="推荐" checked>
-                            <input type="checkbox" name="{articleTag}" title="置顶">
-                            <input type="checkbox" name="{articleTag}" title="热门">
+                            <input type="checkbox" id="articleTag" name="articleTag" title="推荐" value="1" checked />
+                            <input type="checkbox" id="articleTag" name="articleTag" title="置顶" value="2" />
+                            <input type="checkbox" id="articleTag" name="articleTag" title="热门" value="3" />
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章来源：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="{articleSource}" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" class="layui-input">
+                            <input type="text" id="articleSource" name="articleSource" class="layui-input" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" />
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章作者：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="{articleAuthor}" required lay-verify="required" placeholder="请输入文章作者" autocomplete="off" class="layui-input">
+                            <input type="text" id="articleAuthor" name="articleAuthor" class="layui-input" required lay-verify="required" placeholder="请输入文章作者" autocomplete="off" />
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章排序：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="{articleSort}" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" value="">
+                            <input type="text" id="articleSort" name="articleSort" class="layui-input" required lay-verify="required" placeholder="请输入排序" autocomplete="off" />
                         </div>
                     </div>
                 </div>
@@ -120,12 +119,23 @@
 <script src="../admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script>
     function dosubmit(){
+        var _data = {
+            'kindId': $("#kindId").val(),  //文章分类
+            'articleTitle': $("#articleTitle").val(),  //文章标题
+            'articleKeyWord': $("#articleKeyWord").val(),  //文章关键字
+            'articleDesc': $("#articleDesc").val(),  //文章描述
+            'articleContent': $("#articleContent").val(),  //文章内容
+            'articleTag': $("#articleTag").val(),  //文章标签
+            'articleSource': $("#articleSource").val(),  //文章来源
+            'articleAuthor': $("#articleAuthor").val(),  //文章作者
+            'articleSort': $("#articleSort").val(),  //文章排序，默认是0
+        };
         $.ajax({
             type: "POST",
             url: "http://139.129.6.52:8080/webArticle/create?articleSort=1&clickCount=1&displayStatus=1&id=1&isDeleted=1&kindId=1",
-            dataType: "json",
+            data: JSON.stringify(_data),
             contentType: "application/json; charset=utf-8",
-            data: $('#ContentsFrom').serialize(),
+            dataType: "json",
             success: function (json) {
                 if (json.Code == 200) {
                     alert("数据提交成功");
@@ -149,7 +159,7 @@
         //获取当前iframe的name值
         var iframeObj = $(window.frameElement).attr('name');
         //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor', {
+        var editIndex = layedit.build('articleContent', {
             tool: ['strong' //加粗
                 , 'italic' //斜体
                 , 'underline' //下划线
@@ -164,7 +174,7 @@
                 , 'face' //插入表情
             ],
             height: 300
-        })
+        });
         //全选
         form.on('checkbox(allChoose)', function(data) {
             var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');

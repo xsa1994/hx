@@ -56,40 +56,7 @@
 									<th width="10%">操作</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
-									<td>1</td>
-									<td><input type="text" name="title" autocomplete="off" class="layui-input" value="0" data-id="1"></td>
-									<td>CDN网页加速</td>
-									<td>产品中心</td>
-									<td>200</td>
-									<td>2019-07-04</td>
-									<td><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status" data-status='1'>显示</button></td>
-									<td>
-										<div class="layui-inline">
-											<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="1" data-url="article-detail.html"><i class="layui-icon">&#xe642;</i></button>
-											<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="article-detail.html"><i class="layui-icon">&#xe640;</i></button>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="" lay-skin="primary" data-id="1"></td>
-									<td>2</td>
-									<td><input type="text" name="title" autocomplete="off" class="layui-input" value="0" data-id="1"></td>
-									<td>CDN网页加速<span class="c_b_1">推荐</span><span class="c_g_1">置顶</span><span class="c_r_1">热门</span></td>
-									<td>产品中心</td>
-									<td>200</td>
-									<td>2019-07-04</td>
-									<td><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status" data-status='1'>显示</button></td>
-									<td>
-										<div class="layui-inline">
-											<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="1" data-url="article-detail.html"><i class="layui-icon">&#xe642;</i></button>
-											<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="article-detail.html"><i class="layui-icon">&#xe640;</i></button>
-										</div>
-									</td>
-								</tr>
-							</tbody>
+							<tbody id="articleList"></tbody>
 						</table>
 						<div class="page-wrap">
 							<ul class="pagination">
@@ -111,7 +78,6 @@
 		<script>
             layui.use(['form', 'jquery', 'layer', 'dialog'], function() {
                 var $ = layui.jquery;
-
                 //修改状态
                 $('#table-list').on('click', '.table-list-status', function() {
                     var That = $(this);
@@ -124,7 +90,37 @@
 
                     }
                 })
+            });
 
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "http://139.129.6.52:8080/webArticle/create?articleSort=1&clickCount=1&displayStatus=1&id=1&isDeleted=1&kindId=1",
+                    dataType: "json",
+                    success: function(data){
+                        var h="";
+                        $.each(data,function(i,n){
+                            h +='<tr>';
+							h +='<td><input type="checkbox" lay-skin="primary" data-id="1"></td>';
+							h +='<td>n.id</td>';
+							h +='<td><input type="text" class="layui-input" value="0" data-id="1">n.articleSort</td>';
+							h +='<td>n.articleTitle</td>';
+                            h +='<td>n.kindId</td>';
+                            h +='<td>n.clickCount</td>';
+							h +='<td>n.gmtModified</td>';
+                            h +='<td><button class="layui-btn layui-btn-mini layui-btn-normal table-list-status" data-status="1">n.displayStatus</button></td>';
+                            h +='<td>';
+                            h +='<div class="layui-inline">';
+                            h +='<button class="layui-btn layui-btn-small layui-btn-normal go-btn" data-id="1" data-url="article-detail.html"><i class="layui-icon">&#xe642;</i></button>';
+                            h +='<button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="1" data-url="article-detail.html"><i class="layui-icon">&#xe640;</i></button>';
+                            h +='</div>';
+                            h +='</td>';
+                            h +='</tr>';
+                        });
+                        //$("#articleList").append(h);
+                        $('#articleList').html(h ? h : '<tr><td colspan="9" align="center">尚未添加任何记录</td></tr>');
+                    }
+                });
             });
 		</script>
 	</body>
