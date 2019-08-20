@@ -52,12 +52,12 @@
                             <textarea id="articleDesc" name="articleDesc" class="layui-textarea" required lay-verify="required" placeholder="请输入内容" autocomplete="off"></textarea>
                         </div>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">图像上传：</label>
-                        <div class="layui-input-block">
-                            <input type="file" name="file（可随便定义）" class="layui-upload-file" required lay-verify="required" placeholder="请上传图片" autocomplete="off" />
-                        </div>
-                    </div>
+                    <!--<div class="layui-form-item">-->
+                        <!--<label class="layui-form-label">图像上传：</label>-->
+                        <!--<div class="layui-input-block">-->
+                            <!--<input type="file" name="file（可随便定义）" class="layui-upload-file" required lay-verify="required" placeholder="请上传图片" autocomplete="off" />-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">文章内容：</label>
                         <div class="layui-input-block">
@@ -128,11 +128,11 @@
             'articleTag': $("#articleTag").val(),  //文章标签
             'articleSource': $("#articleSource").val(),  //文章来源
             'articleAuthor': $("#articleAuthor").val(),  //文章作者
-            'articleSort': $("#articleSort").val(),  //文章排序，默认是0
+            'articleSort': $("#articleSort").val()  //文章排序，默认是0
         };
         $.ajax({
             type: "POST",
-            url: "http://139.129.6.52:8080/webArticle/create?articleSort=1&clickCount=1&displayStatus=1&id=1&isDeleted=1&kindId=1",
+            url: "http://127.0.0.1:8080/webArticle/create",
             data: JSON.stringify(_data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

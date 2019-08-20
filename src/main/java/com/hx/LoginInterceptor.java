@@ -36,21 +36,21 @@ public class LoginInterceptor implements HandlerInterceptor, InitializingBean {
         Long accountId = RequestLocal.get().getAccountId();
         String path = request.getServletPath();
 
-        if (path.startsWith("/webjars") || path.startsWith("/swagger") || path.startsWith("/root")
-                || path.startsWith("/images") || white_request_url.contains(path) || path.startsWith("/open") ||
-                path.startsWith("/error")) {
-            return true;
-        } else if (accountId != null) {
-            if ("/login".equals(path) || "/logout".equals(path)) {
-                // 登录过且未失效, 再重新登录的话重定向到首页
-                response.sendRedirect("/page/index.html");
-                return false;
-            }
-        } else {
-            log.warn("login is expire, please login again!");
-            response.sendRedirect("/page/login.html");
-            return false;
-        }
+//        if (path.startsWith("/webjars") || path.startsWith("/swagger") || path.startsWith("/root")
+//                || path.startsWith("/images") || white_request_url.contains(path) || path.startsWith("/open") ||
+//                path.startsWith("/error")) {
+//            return true;
+//        } else if (accountId != null) {
+//            if ("/login".equals(path) || "/logout".equals(path)) {
+//                // 登录过且未失效, 再重新登录的话重定向到首页
+//                response.sendRedirect("/page/index.html");
+//                return false;
+//            }
+//        } else {
+//            log.warn("login is expire, please login again!");
+//            response.sendRedirect("/page/login.html");
+//            return false;
+//        }
         return true;
     }
 
