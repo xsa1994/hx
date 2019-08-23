@@ -58,7 +58,6 @@
 							<input type="file" name="file（可随便定义）" class="layui-upload-file" required lay-verify="required" placeholder="请上传图片" autocomplete="off" />
 						</div>
 					</div>
-
 					<div class="layui-form-item layui-form-text">
 						<label class="layui-form-label">文章内容：</label>
 						<div class="layui-input-block">
@@ -73,10 +72,10 @@
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">标签：</label>
-						<div class="layui-input-block">
-							<input type="checkbox" id="articleTag" name="articleTag" title="推荐" value="1" checked />
-							<input type="checkbox" id="articleTag" name="articleTag" title="置顶" value="2" />
-							<input type="checkbox" id="articleTag" name="articleTag" title="热门" value="3" />
+						<div id="articleTag" class="layui-input-block">
+							<input type="checkbox" name="articleTag" title="推荐" value="recmd" checked />
+							<input type="checkbox" name="articleTag" title="置顶" value="top" />
+							<input type="checkbox" name="articleTag" title="热门" value="hot" />
 						</div>
 					</div>
 					<div class="layui-form-item">
