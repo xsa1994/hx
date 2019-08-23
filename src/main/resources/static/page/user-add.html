@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+    <title>慧馨后台管理</title>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="../../../publish/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../admin/css/admin.css"/>
+    <script src="../admin/js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="layui-tab page-content-wrap">
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form" style="width: 90%;padding-top: 20px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">ID：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="id" name="id" disabled autocomplete="off"
+                               class="layui-input layui-disabled" value="1">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户组：</label>
+                    <div class="layui-input-block">
+                        <select id="roleType" name="roleType" required lay-verify="required">
+                            <option value="1">超级管理员</option>
+                            <option value="2">普通会员</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="accountName" name="accountName" class="layui-input" required
+                               lay-verify="required" placeholder="请输入用户名" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">密码：</label>
+                    <div class="layui-input-block">
+                        <input type="password" id="password" name="password" class="layui-input" required
+                               lay-verify="required" placeholder="请输入密码"
+                               autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">真实姓名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="linkName" name="linkName" class="layui-input" required
+                               lay-verify="required" placeholder="请输入真实姓名" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证件号：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="idNum" name="idNum" class="layui-input" required lay-verify="required"
+                               placeholder="请输入证件号" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">手机号：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="mobilePhone" name="mobilePhone" class="layui-input" required
+                               lay-verify="required" placeholder="请输入联系方式" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">QQ：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="linkQq" name="qq" class="layui-input" required lay-verify="required"
+                               placeholder="请输入QQ号" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminInfo"
+                                onclick="userSubmit()">立即提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script>
+            layui.use(['form', 'element'], function () {
+                function userSubmit() {
+                    var _data = {
+                        'accountName': $("#accountName").val(),  //用户名
+                        'password': $("#password").val(),  //密码
+                        'linkName': $("#linkName").val(),  //真实姓名
+                        'idNum': $("#idNum").val(),  //证件号
+                        'mobilePhone': $("#mobilePhone").val(),  //手机号
+                        'linkQq': $("#linkQq").val(),  //QQ
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "http://139.129.6.52:8080/account/create?accountStatus=1&belongSystem=1&id=1&mobilePhone=13123213213&roleType=1",
+                        data: JSON.stringify(_data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (json) {
+                            if (json.Code == 200) {
+                                alert("数据提交成功");
+                            }
+                        },
+                        error: function () {
+                            alert("数据提交异常！");
+                        }
+                    });
+                }
+            });
+        </script>
+</body>
+</html>

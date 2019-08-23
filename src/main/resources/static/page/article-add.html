@@ -11,6 +11,9 @@
     <link rel="shortcut icon" href="../../../publish/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../admin/layui/css/layui.css"/>
     <link rel="stylesheet" type="text/css" href="../admin/css/admin.css"/>
+    <script src="../admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../admin/js/jQuery.js"></script>
 </head>
 
 <body>
@@ -37,57 +40,64 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章名称：</label>
                         <div class="layui-input-block">
-                            <input type="text" id="articleTitle" name="articleTitle" class="layui-input" required lay-verify="required" placeholder="请输入文章名称" autocomplete="off" />
+                            <input type="text" id="articleTitle" name="articleTitle" class="layui-input" required
+                                   lay-verify="required" placeholder="请输入文章名称" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">关键字：</label>
                         <div class="layui-input-block">
-                                <input type="text" id="articleKeyWord" name="articleKeyWord" class="layui-input" required lay-verify="required" placeholder="请输入关键字" autocomplete="off" />
+                            <input type="text" id="articleKeyWord" name="articleKeyWord" class="layui-input" required
+                                   lay-verify="required" placeholder="请输入关键字" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">描述：</label>
                         <div class="layui-input-block">
-                            <textarea id="articleDesc" name="articleDesc" class="layui-textarea" required lay-verify="required" placeholder="请输入内容" autocomplete="off"></textarea>
+                            <textarea id="articleDesc" name="articleDesc" class="layui-textarea" required
+                                      lay-verify="required" placeholder="请输入内容" autocomplete="off"></textarea>
                         </div>
                     </div>
                     <!--<div class="layui-form-item">-->
-                        <!--<label class="layui-form-label">图像上传：</label>-->
-                        <!--<div class="layui-input-block">-->
-                            <!--<input type="file" name="file（可随便定义）" class="layui-upload-file" required lay-verify="required" placeholder="请上传图片" autocomplete="off" />-->
-                        <!--</div>-->
+                    <!--<label class="layui-form-label">图像上传：</label>-->
+                    <!--<div class="layui-input-block">-->
+                    <!--<input type="file" name="file（可随便定义）" class="layui-upload-file" required lay-verify="required" placeholder="请上传图片" autocomplete="off" />-->
+                    <!--</div>-->
                     <!--</div>-->
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">文章内容：</label>
                         <div class="layui-input-block">
-                            <textarea id="articleContent" name="articleContent" class="layui-textarea layui-hide" lay-verify="content" autocomplete="off"></textarea>
+                            <textarea id="articleContent" name="articleContent" class="layui-textarea layui-hide"
+                                      lay-verify="content" autocomplete="off"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">标签：</label>
                         <div id="articleTag" class="layui-input-block">
-                            <input type="checkbox" name="articleTag" title="推荐" value="recmd" checked />
-                            <input type="checkbox" name="articleTag" title="置顶" value="top" />
-                            <input type="checkbox" name="articleTag" title="热门" value="hot" />
+                            <input type="checkbox" name="articleTag" title="推荐" value="recmd" checked/>
+                            <input type="checkbox" name="articleTag" title="置顶" value="top"/>
+                            <input type="checkbox" name="articleTag" title="热门" value="hot"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章来源：</label>
                         <div class="layui-input-block">
-                            <input type="text" id="articleSource" name="articleSource" class="layui-input" required lay-verify="required" placeholder="请输入文章来源" autocomplete="off" />
+                            <input type="text" id="articleSource" name="articleSource" class="layui-input" required
+                                   lay-verify="required" placeholder="请输入文章来源" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章作者：</label>
                         <div class="layui-input-block">
-                            <input type="text" id="articleAuthor" name="articleAuthor" class="layui-input" required lay-verify="required" placeholder="请输入文章作者" autocomplete="off" />
+                            <input type="text" id="articleAuthor" name="articleAuthor" class="layui-input" required
+                                   lay-verify="required" placeholder="请输入文章作者" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章排序：</label>
                         <div class="layui-input-block">
-                            <input type="text" id="articleSort" name="articleSort" class="layui-input" required lay-verify="required" placeholder="请输入排序" autocomplete="off" />
+                            <input type="text" id="articleSort" name="articleSort" class="layui-input" required
+                                   lay-verify="required" placeholder="请输入排序" autocomplete="off"/>
                         </div>
                     </div>
                 </div>
@@ -95,7 +105,8 @@
         </div>
         <div class="layui-form-item" style="padding-left: 10px;">
             <div class="layui-input-block">
-                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="dosubmit()">立即提交</button>
+                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo" onclick="dosubmit()">立即提交
+                </button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -115,10 +126,8 @@
         listOrderAll: '/admin/category/listorderall.html'
     }
 </script>
-<script src="../admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-<script src="../admin/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    function dosubmit(){
+    function dosubmit() {
         var _data = {
             'kindId': $("#kindId").val(),  //文章分类
             'articleTitle': $("#articleTitle").val(),  //文章标题
@@ -141,12 +150,13 @@
                     alert("数据提交成功");
                 }
             },
-            error : function() {
+            error: function () {
                 alert("数据提交异常！");
             }
         });
     }
-    layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',  'element', 'upload', 'layedit'], function() {
+
+    layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog', 'element', 'upload', 'layedit'], function () {
         var form = layui.form(),
             layer = layui.layer,
             $ = layui.jquery,
@@ -176,9 +186,9 @@
             height: 300
         });
         //全选
-        form.on('checkbox(allChoose)', function(data) {
+        form.on('checkbox(allChoose)', function (data) {
             var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
-            child.each(function(index, item) {
+            child.each(function (index, item) {
                 item.checked = data.elem.checked;
             });
             form.render('checkbox');
@@ -187,7 +197,7 @@
 
         layui.upload({
             url: '上传接口url',
-            success: function(res) {
+            success: function (res) {
                 console.log(res); //上传成功返回值，必须为json格式
             }
         });
