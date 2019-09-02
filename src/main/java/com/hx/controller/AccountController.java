@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,7 @@ public class AccountController {
 
     @ApiOperation(value = "新增用户", httpMethod = "POST", notes = "新增用户", response = Boolean.class)
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public Boolean create(@ModelAttribute Account account) throws HxException {
+    public Boolean create(@ModelAttribute @RequestBody Account account) throws HxException {
         if (account == null || account.getAccountName() == null) {
             logger.error("create account name is null");
             throw new HxException("用户名不能为空");
@@ -59,7 +60,7 @@ public class AccountController {
 
     @ApiOperation(value = "更新用户", httpMethod = "POST", notes = "更新用户", response = Boolean.class)
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public Boolean update(@ModelAttribute Account account) throws HxException {
+    public Boolean update(@ModelAttribute @RequestBody Account account) throws HxException {
         if (account == null || account.getId() == null) {
             throw new HxException("用户ID不能为空");
         }

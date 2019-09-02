@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +38,7 @@ public class MenuPageController {
 
     @ApiOperation(value = "添加单页", httpMethod = "POST", notes = "添加单页", response = Boolean.class)
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public Boolean create(@ModelAttribute MenuPage menuPage) throws HxException {
+    public Boolean create(@ModelAttribute @RequestBody MenuPage menuPage) throws HxException {
         if (menuPage == null || menuPage.getKindId() == null || menuPage.getPageName() == null) {
             throw new HxException("参数为空");
         }
@@ -47,7 +48,7 @@ public class MenuPageController {
 
     @ApiOperation(value = "修改单页(包括修改排序)", httpMethod = "POST", notes = "修改单页", response = Boolean.class)
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public Boolean update(@ModelAttribute MenuPage menuPage) throws HxException {
+    public Boolean update(@ModelAttribute @RequestBody MenuPage menuPage) throws HxException {
         if (menuPage == null || menuPage.getId() == null) {
             throw new HxException("ID不能为空");
         }

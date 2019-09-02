@@ -9,9 +9,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,12 +33,14 @@ import java.util.List;
 @RequestMapping("webArticle")
 public class WebArticleController {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebArticleController.class);
+
     @Autowired
     private WebArticleMapper webArticleMapper;
 
     @ApiOperation(value = "添加文章", httpMethod = "POST", notes = "添加单页", response = Boolean.class)
-    @RequestMapping(value = "create", method = RequestMethod.POST)
-    public Boolean create(@ModelAttribute WebArticle webArticle) throws HxException {
+    @RequestMapping(value = "create")
+    public Boolean create(WebArticle webArticle) throws HxException {
         if (webArticle == null || webArticle.getArticleTitle() == null || webArticle.getKindId() == null) {
             throw new HxException("必传参数不能为空");
         }
@@ -44,7 +49,7 @@ public class WebArticleController {
 
     @ApiOperation(value = "修改文章", httpMethod = "POST", notes = "修改文章", response = Boolean.class)
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public Boolean update(@ModelAttribute WebArticle webArticle) throws HxException {
+    public Boolean update(@ModelAttribute  @RequestBody WebArticle webArticle) throws HxException {
         if (webArticle == null || webArticle.getId() == null) {
             throw new HxException("ID不能为空");
         }
@@ -74,13 +79,18 @@ public class WebArticleController {
             pageSize = 20;
         }
 
-        Integer count = webArticleMapper.countAll();
-        if (count == 0) {
-            return new PageResult(count, Lists.newArrayList(), pageSize);
-        } else {
-            int start = (currentPage - 1) * pageSize;
-            int limit = pageSize;
-            return new PageResult(count, webArticleMapper.pageQueryAll(start, limit), pageSize);
+        try {
+            Integer count = webArticleMapper.countAll();
+            if (count == 0) {
+                return new PageResult(count, Lists.newArrayList(), pageSize);
+            } else {
+                int start = (currentPage - 1) * pageSize;
+                int limit = pageSize;
+                return new PageResult(count, webArticleMapper.pageQueryAll(start, limit), pageSize);
+            }
+        } catch (Exception e) {
+            logger.error("pageQuery article exception", e);
+            return new PageResult(0, Lists.newArrayList(), pageSize);
         }
     }
 

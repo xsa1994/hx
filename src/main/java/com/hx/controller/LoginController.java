@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,7 @@ public class LoginController {
 
     @ApiOperation(value = "用户登录", httpMethod = "POST", notes = "用户登录", response = Boolean.class)
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Account login(@ModelAttribute Account account) throws HxException {
+    public Account login(@ModelAttribute @RequestBody Account account) throws HxException {
         if (account == null || account.getAccountName() == null) {
             logger.error("login account name is null");
             throw new HxException("用户名不能为空");
@@ -60,7 +61,7 @@ public class LoginController {
 
     @ApiOperation(value = "登出用户", httpMethod = "POST", notes = "登出用户", response = Boolean.class)
     @RequestMapping(value = "logout", method = RequestMethod.POST)
-    public Boolean logout(@ModelAttribute Account account) throws HxException {
+    public Boolean logout(@ModelAttribute @RequestBody Account account) throws HxException {
         if (account == null || account.getId() == null) {
             throw new HxException("用户ID不能为空");
         }
