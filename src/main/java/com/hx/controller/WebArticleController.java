@@ -39,8 +39,8 @@ public class WebArticleController {
     private WebArticleMapper webArticleMapper;
 
     @ApiOperation(value = "添加文章", httpMethod = "POST", notes = "添加单页", response = Boolean.class)
-    @RequestMapping(value = "create")
-    public Boolean create(WebArticle webArticle) throws HxException {
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public Boolean create(@RequestBody WebArticle webArticle) throws HxException {
         if (webArticle == null || webArticle.getArticleTitle() == null || webArticle.getKindId() == null) {
             throw new HxException("必传参数不能为空");
         }
