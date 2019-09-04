@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +49,7 @@ public class StatisticsController {
 
     @ApiOperation(value = "新增网站访问PV", httpMethod = "POST", notes = "新增网站访问PV", response = Boolean.class)
     @RequestMapping(value = "addPv", method = RequestMethod.POST)
-    public Boolean addPv(@ModelAttribute PageVisitRecord pageVisitRecord, HttpServletRequest request) {
+    public Boolean addPv(@RequestBody PageVisitRecord pageVisitRecord, HttpServletRequest request) {
         if (pageVisitRecord == null || pageVisitRecord.getUserId() == null) {
             logger.error("add user visit record param is null");
             return false;

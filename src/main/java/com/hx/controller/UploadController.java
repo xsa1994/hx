@@ -65,7 +65,7 @@ public class UploadController {
             //将上传的文件写到服务器上指定的文件。
             file.transferTo(targetFile);
 
-            return "http://139.129.6.52/img/" + fileName;//返回存储路径
+            return "http://39.100.246.6/img/" + fileName;//返回存储路径
         } catch (Exception e) {
             logger.error("upload image exception", e);
             throw new HxException("系统异常，图片上传失败");
