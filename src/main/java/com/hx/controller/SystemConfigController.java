@@ -37,7 +37,7 @@ public class SystemConfigController {
 
     @ApiOperation(value = "站点配置", httpMethod = "POST", notes = "站点配置", response = Boolean.class)
     @RequestMapping(value = "webSiteConfig", method = RequestMethod.POST)
-    public Boolean webSiteConfig(@ModelAttribute @RequestBody WebsiteConfig websiteConfig) throws HxException {
+    public Boolean webSiteConfig(@RequestBody WebsiteConfig websiteConfig) throws HxException {
         if (websiteConfig == null || StringUtils.isBlank(websiteConfig.getSiteName())|| StringUtils.isBlank(websiteConfig.getSiteDomain())) {
             throw new HxException("参数不能为空");
         }
@@ -62,7 +62,7 @@ public class SystemConfigController {
 
     @ApiOperation(value = "SEO配置", httpMethod = "POST", notes = "SEO配置", response = Boolean.class)
     @RequestMapping(value = "seoConfig", method = RequestMethod.POST)
-    public Boolean seoConfig(@ModelAttribute @RequestBody SeoConfig seoConfig) throws HxException {
+    public Boolean seoConfig(@RequestBody SeoConfig seoConfig) throws HxException {
         if (seoConfig == null || StringUtils.isBlank(seoConfig.getSeoTitle())) {
             throw new HxException("参数不能为空");
         }

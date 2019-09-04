@@ -49,7 +49,7 @@ public class StatisticsController {
 
     @ApiOperation(value = "新增网站访问PV", httpMethod = "POST", notes = "新增网站访问PV", response = Boolean.class)
     @RequestMapping(value = "addPv", method = RequestMethod.POST)
-    public Boolean addPv(@ModelAttribute @RequestBody PageVisitRecord pageVisitRecord, HttpServletRequest request) {
+    public Boolean addPv(@RequestBody PageVisitRecord pageVisitRecord, HttpServletRequest request) {
         if (pageVisitRecord == null || pageVisitRecord.getUserId() == null) {
             logger.error("add user visit record param is null");
             return false;

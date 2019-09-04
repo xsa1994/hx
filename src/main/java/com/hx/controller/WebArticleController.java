@@ -50,7 +50,7 @@ public class WebArticleController {
 
     @ApiOperation(value = "修改文章", httpMethod = "POST", notes = "修改文章", response = Boolean.class)
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public Boolean update(@ModelAttribute  @RequestBody WebArticle webArticle) throws HxException {
+    public Boolean update(@RequestBody WebArticle webArticle) throws HxException {
         if (webArticle == null || webArticle.getId() == null) {
             throw new HxException("ID不能为空");
         }
@@ -61,7 +61,7 @@ public class WebArticleController {
     @ApiOperation(value = "删除文章(可批量)", httpMethod = "POST", notes = "删除文章", response = Boolean.class)
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ApiImplicitParams(value = {@ApiImplicitParam(name = "ids", required = true, value = "文章ID列表(字符串数组)", dataType = "array", paramType = "query")})
-    public Boolean delete(@ModelAttribute @RequestParam List<Long> ids) throws HxException {
+    public Boolean delete(@RequestParam List<Long> ids) throws HxException {
         if (CollectionUtils.isEmpty(ids)) {
             throw new HxException("删除IDS不能为空");
         }
@@ -72,7 +72,7 @@ public class WebArticleController {
     @RequestMapping(value = "pageQuery", method = RequestMethod.GET)
     @ApiImplicitParams(value = {@ApiImplicitParam(name = "currentPage", required = true, value = "当前页(默认1)", dataType = "integer", paramType = "query", example = "1"),
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页大小(默认20，若想查询所有则该字段传入-1)", dataType = "integer", paramType = "query", example = "1")})
-    public PageResult<WebArticle> pageQuery(@ModelAttribute @RequestParam Integer currentPage, @ModelAttribute @RequestParam Integer pageSize) throws HxException {
+    public PageResult<WebArticle> pageQuery(@RequestParam Integer currentPage, @RequestParam Integer pageSize) throws HxException {
         if (currentPage == null) {
             throw new HxException("分页参数不能为空");
         }
@@ -98,7 +98,7 @@ public class WebArticleController {
 //    @ApiOperation(value = "查询文章详情", httpMethod = "GET", notes = "查询文章详情", response = WebArticle.class)
 //    @RequestMapping(value = "queryById", method = RequestMethod.GET)
 //    @ApiImplicitParams(value = {@ApiImplicitParam(name = "id", required = true, value = "文章ID", dataType = "long", paramType = "query", example = "1")})
-//    public WebArticle queryById(@ModelAttribute @RequestParam Long id) throws HxException {
+//    public WebArticle queryById(@RequestParam Long id) throws HxException {
 //        //todo
 //        return new WebArticle();
 //    }

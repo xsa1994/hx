@@ -35,7 +35,7 @@ public class LoginController {
 
     @ApiOperation(value = "用户登录", httpMethod = "POST", notes = "用户登录", response = Boolean.class)
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Account login(@ModelAttribute @RequestBody Account account) throws HxException {
+    public Account login(@RequestBody Account account) throws HxException {
         if (account == null || StringUtils.isBlank(account.getAccountName())) {
             logger.error("login account name is null");
             throw new HxException("用户名不能为空");
@@ -62,7 +62,7 @@ public class LoginController {
 
     @ApiOperation(value = "登出用户", httpMethod = "POST", notes = "登出用户", response = Boolean.class)
     @RequestMapping(value = "logout", method = RequestMethod.POST)
-    public Boolean logout(@ModelAttribute @RequestBody Account account) throws HxException {
+    public Boolean logout(@RequestBody Account account) throws HxException {
         if (account == null || account.getId() == null) {
             throw new HxException("用户ID不能为空");
         }
