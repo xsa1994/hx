@@ -7,6 +7,7 @@ import com.hx.util.HxException;
 import com.hx.util.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class LoginController {
     @ApiOperation(value = "用户登录", httpMethod = "POST", notes = "用户登录", response = Boolean.class)
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public Account login(@ModelAttribute @RequestBody Account account) throws HxException {
-        if (account == null || account.getAccountName() == null) {
+        if (account == null || StringUtils.isBlank(account.getAccountName())) {
             logger.error("login account name is null");
             throw new HxException("用户名不能为空");
         }

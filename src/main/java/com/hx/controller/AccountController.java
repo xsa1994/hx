@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class AccountController {
     @ApiOperation(value = "新增用户", httpMethod = "POST", notes = "新增用户", response = Boolean.class)
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public Boolean create(@ModelAttribute @RequestBody Account account) throws HxException {
-        if (account == null || account.getAccountName() == null) {
+        if (account == null || StringUtils.isBlank(account.getAccountName())) {
             logger.error("create account name is null");
             throw new HxException("用户名不能为空");
         }

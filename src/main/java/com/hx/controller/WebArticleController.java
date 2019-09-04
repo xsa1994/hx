@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class WebArticleController {
     @ApiOperation(value = "添加文章", httpMethod = "POST", notes = "添加单页", response = Boolean.class)
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public Boolean create(@RequestBody WebArticle webArticle) throws HxException {
-        if (webArticle == null || webArticle.getArticleTitle() == null || webArticle.getKindId() == null) {
+        if (webArticle == null || StringUtils.isBlank(webArticle.getArticleTitle()) || webArticle.getKindId() == null) {
             throw new HxException("必传参数不能为空");
         }
         return webArticleMapper.insertHxWebArticle(webArticle) > 0;
@@ -94,11 +95,11 @@ public class WebArticleController {
         }
     }
 
-    @ApiOperation(value = "查询文章详情", httpMethod = "GET", notes = "查询文章详情", response = WebArticle.class)
-    @RequestMapping(value = "queryById", method = RequestMethod.GET)
-    @ApiImplicitParams(value = {@ApiImplicitParam(name = "id", required = true, value = "文章ID", dataType = "long", paramType = "query", example = "1")})
-    public WebArticle queryById(@ModelAttribute @RequestParam Long id) throws HxException {
-        //todo
-        return new WebArticle();
-    }
+//    @ApiOperation(value = "查询文章详情", httpMethod = "GET", notes = "查询文章详情", response = WebArticle.class)
+//    @RequestMapping(value = "queryById", method = RequestMethod.GET)
+//    @ApiImplicitParams(value = {@ApiImplicitParam(name = "id", required = true, value = "文章ID", dataType = "long", paramType = "query", example = "1")})
+//    public WebArticle queryById(@ModelAttribute @RequestParam Long id) throws HxException {
+//        //todo
+//        return new WebArticle();
+//    }
 }

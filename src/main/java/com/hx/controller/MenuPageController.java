@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,7 +40,7 @@ public class MenuPageController {
     @ApiOperation(value = "添加单页", httpMethod = "POST", notes = "添加单页", response = Boolean.class)
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public Boolean create(@ModelAttribute @RequestBody MenuPage menuPage) throws HxException {
-        if (menuPage == null || menuPage.getKindId() == null || menuPage.getPageName() == null) {
+        if (menuPage == null || menuPage.getKindId() == null || StringUtils.isBlank(menuPage.getPageName())) {
             throw new HxException("参数为空");
         }
 

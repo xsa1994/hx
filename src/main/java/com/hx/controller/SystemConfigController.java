@@ -8,6 +8,7 @@ import com.hx.util.DateUtils;
 import com.hx.util.HxException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +38,7 @@ public class SystemConfigController {
     @ApiOperation(value = "站点配置", httpMethod = "POST", notes = "站点配置", response = Boolean.class)
     @RequestMapping(value = "webSiteConfig", method = RequestMethod.POST)
     public Boolean webSiteConfig(@ModelAttribute @RequestBody WebsiteConfig websiteConfig) throws HxException {
-        if (websiteConfig == null || websiteConfig.getSiteName() == null || websiteConfig.getSiteDomain() == null) {
+        if (websiteConfig == null || StringUtils.isBlank(websiteConfig.getSiteName())|| StringUtils.isBlank(websiteConfig.getSiteDomain())) {
             throw new HxException("参数不能为空");
         }
 
@@ -62,7 +63,7 @@ public class SystemConfigController {
     @ApiOperation(value = "SEO配置", httpMethod = "POST", notes = "SEO配置", response = Boolean.class)
     @RequestMapping(value = "seoConfig", method = RequestMethod.POST)
     public Boolean seoConfig(@ModelAttribute @RequestBody SeoConfig seoConfig) throws HxException {
-        if (seoConfig == null || seoConfig.getSeoTitle() == null) {
+        if (seoConfig == null || StringUtils.isBlank(seoConfig.getSeoTitle())) {
             throw new HxException("参数不能为空");
         }
 
