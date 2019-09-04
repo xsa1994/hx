@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @since JDK 1.6
  */
-@Api(tags = {"用户管理"})
+@Api(tags = {"登录管理"})
 @RestController
 @RequestMapping("")
 public class LoginController {
